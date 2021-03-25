@@ -44,7 +44,7 @@
 @media (min-width: 768px) {
   .logistics {
     padding: 2rem;
-    margin: -5rem auto;
+    margin: 2rem auto;
     gap: 3rem;
     flex-direction: row;
     align-items: stretch;
