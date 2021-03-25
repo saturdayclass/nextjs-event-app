@@ -12,7 +12,7 @@ function AllEventPage() {
   };
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>All Events</h1>
+      <h1 className="center">All Events</h1>
       <EventSearch onSearch={searchEventHandler} />
       <EventList items={events} />
     </div>
