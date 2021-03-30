@@ -11,7 +11,7 @@ function HomePage(props) {
 
 export default HomePage;
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const req = await fetch(
     'https://nextjs-data-fetching-b085e-default-rtdb.firebaseio.com/events.json'
   );
