@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Head from 'next/head';
 import EventList from '../../components/events/event-list';
 import { getFilteredEvents } from './../../helpers/api-util';
 import ResultsTitle from './../../components/events/results-title';
@@ -6,9 +6,19 @@ import ErrorAlert from './../../components/ui/error-alert';
 import Button from './../../components/ui/button';
 
 function FilteredEventPage(props) {
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${props.numMonth}/${props.numYear}`}
+      />
+    </Head>
+  );
   if (props.hasError) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invlid Filter</p>
         </ErrorAlert>
@@ -24,6 +34,7 @@ function FilteredEventPage(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found</p>
         </ErrorAlert>
@@ -38,6 +49,7 @@ function FilteredEventPage(props) {
 
   return (
     <div>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </div>
