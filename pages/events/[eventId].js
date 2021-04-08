@@ -19,13 +19,13 @@ function EventDetailPage(props) {
       <Head>
         <title>{event.title}</title>
         <meta name="description" content={event.description} />
-        <meta name="image" content={event.image} />
+        <meta name="image" content={event.images} />
       </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}
         address={event.location}
-        image={event.image}
+        image={event.images}
         imageAlt={event.title}
       />
       <EventContent>
