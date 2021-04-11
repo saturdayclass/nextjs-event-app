@@ -3,6 +3,7 @@ import EventLogistics from './../../components/event-detail/event-logistics';
 import EventContent from './../../components/event-detail/event-content';
 import ErrorAlert from './../../components/ui/error-alert';
 import { getEventById, getAllEvents } from './../../helpers/api-util';
+import Comments from '../../components/input/comments';
 import Head from 'next/head';
 function EventDetailPage(props) {
   const { event } = props;
@@ -31,6 +32,7 @@ function EventDetailPage(props) {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </>
   );
 }

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { getAllEvents } from './../../helpers/api-util';
 import EventList from './../../components/events/event-list';
 import EventSearch from './../../components/events/event-search';
+
 function AllEventPage(props) {
   const { events } = props;
   const router = useRouter();
