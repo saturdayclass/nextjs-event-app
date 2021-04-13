@@ -8,10 +8,9 @@ async function handler(req, res) {
       return;
     }
 
-    const client = await MongoClient.connect(
-      'mongodb+srv://raihan:TdgFAVbWi8bwLVR@cluster0.y2bdk.mongodb.net/nextjs-event-app?retryWrites=true&w=majority',
-      { useUnifiedTopology: true }
-    );
+    const client = await MongoClient.connect(process.env.DB, {
+      useUnifiedTopology: true,
+    });
     const db = await client.db();
     await db.collection('emails').insertOne({ email });
 
