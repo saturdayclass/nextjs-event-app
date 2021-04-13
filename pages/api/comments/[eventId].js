@@ -20,11 +20,10 @@ async function handler(req, res) {
       text,
       eventId,
     };
-    const db = client.db();
+    const db = await client.db();
     const res = await db.collection('comments').insertOne(newComment);
 
     newComment.id = res.insertedId;
-    console.lof(newComment);
     res
       .status(201)
       .json({ message: 'added comment successfully', comment: newComment });
