@@ -32,7 +32,7 @@ function Comments(props) {
         .then((comment) => comment.json())
         .then((res) => setComments(res.comments));
     }
-  }, []);
+  }, [showComments]);
 
   return (
     <section className={classes.comments}>
