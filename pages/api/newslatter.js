@@ -12,7 +12,7 @@ async function handler(req, res) {
       useUnifiedTopology: true,
     });
     const db = await client.db();
-    await db.collection('emails').insertOne({ email });
+    await db.collection('newslatter').insertOne({ email });
 
     client.close();
     res
