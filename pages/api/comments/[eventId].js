@@ -2,7 +2,7 @@ import { MongoClient } from 'mongodb';
 async function handler(req, res) {
   const eventId = req.query.eventId;
 
-  const client = MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
+  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
     useUnifiedTopology: true,
   });
 
@@ -21,9 +21,9 @@ async function handler(req, res) {
       eventId,
     };
     const db = await client.db();
-    const res = await db.collection('comments').insertOne(newComment);
+    const result = await db.collection('comments').insertOne(newComment);
 
-    newComment.id = res.insertedId;
+    newComment.id = result.insertedId;
     res
       .status(201)
       .json({ message: 'added comment successfully', comment: newComment });
