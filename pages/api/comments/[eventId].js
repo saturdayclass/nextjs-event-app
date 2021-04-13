@@ -24,6 +24,7 @@ async function handler(req, res) {
     const res = await db.collection('comments').insertOne(newComment);
 
     newComment.id = res.insertedId;
+    console.lof(newComment);
     res
       .status(201)
       .json({ message: 'added comment successfully', comment: newComment });
