@@ -1,4 +1,5 @@
-function handler(req, res) {
+import { MongoClient } from 'mongodb';
+async function handler(req, res) {
   if (req.method === 'POST') {
     const email = req.body.email;
 
@@ -7,7 +8,13 @@ function handler(req, res) {
       return;
     }
 
-    console.log(email);
+    const client = await MongoClient.connect(process.env.DB, {
+      useUnifiedTopology: true,
+    });
+    const db = await client.db();
+    await db.collection('emails').insertOne({ email });
+
+    client.close();
     res
       .status(201)
       .json({ message: 'Email was successfully registered', data: email });
