@@ -8,6 +8,8 @@ async function handler(req, res) {
       return;
     }
 
+    console.log(process.env.NEXT_PUBLIC_DB);
+
     const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
       useUnifiedTopology: true,
     });
