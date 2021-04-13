@@ -9,6 +9,7 @@ function Comments(props) {
 
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState([]);
+  const [isAddComment, setIsAddComment] = useState();
 
   function toggleCommentsHandler() {
     setShowComments((prevStatus) => !prevStatus);
@@ -24,6 +25,7 @@ function Comments(props) {
       },
     });
     const res = await req.json();
+    setIsAddComment(Math.random());
   }
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function Comments(props) {
         .then((comment) => comment.json())
         .then((res) => setComments(res.comments));
     }
-  }, [showComments]);
+  }, [showComments, isAddComment]);
 
   return (
     <section className={classes.comments}>
