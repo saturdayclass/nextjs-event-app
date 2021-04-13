@@ -1,5 +1,11 @@
-function handler(req, res) {
+import { MongoClient } from 'mongodb';
+async function handler(req, res) {
   const eventId = req.query.eventId;
+
+  const client = MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
+    useUnifiedTopology: true,
+  });
+
   if (req.method === 'POST') {
     const { email, name, text } = req.body;
 
@@ -12,35 +18,25 @@ function handler(req, res) {
       email,
       name,
       text,
+      eventId,
     };
-    console.log(newComment);
+    const db = client.db();
+    const res = await db.collection('comments').insertOne(newComment);
+
+    newComment.id = res.insertedId;
     res
       .status(201)
       .json({ message: 'added comment successfully', comment: newComment });
   }
   if (req.method === 'GET') {
-    const dummyList = [
-      {
-        id: 'c1',
-        name: 'Raihan',
-        email: 'raihan@gmail.com',
-        text: 'Very Nice!',
-      },
-      {
-        id: 'c1',
-        name: 'Santoso',
-        email: 'santoso@gmail.com',
-        text: 'Very Good!',
-      },
-      {
-        id: 'c1',
-        name: 'Bambang',
-        email: 'raihan@gmail.com',
-        text: 'Very Well!',
-      },
-    ];
+    const db = client.db();
 
-    res.status(200).json({ comments: dummyList });
+    const documents = await db
+      .collection('comments')
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+    res.status(200).json({ comments: documents });
   }
 }
 
