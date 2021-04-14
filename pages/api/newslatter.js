@@ -9,7 +9,7 @@ async function Connect() {
 
 async function insertDocument(client, email) {
   const db = await client.db();
-  await db.collection('newslatter').insertOne({ email });
+  await db.collection('newslatter').insertOne(email);
 }
 
 async function handler(req, res) {
