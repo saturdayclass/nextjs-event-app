@@ -1,16 +1,4 @@
-import { MongoClient } from 'mongodb';
-
-async function Connect() {
-  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
-    useUnifiedTopology: true,
-  });
-  return client;
-}
-
-async function insertDocument(client, email) {
-  const db = await client.db();
-  await db.collection('newslatter').insertOne(email);
-}
+import { Connect, insertDocument } from './../../helpers/db-util';
 
 async function handler(req, res) {
   if (req.method === 'POST') {
@@ -29,7 +17,7 @@ async function handler(req, res) {
       return;
     }
     try {
-      await insertDocument(client, { email });
+      await insertDocument(client, 'newslatter', { email });
       client.close();
     } catch (err) {
       res.status(500).json({ message: 'Inserting data failded!' });
