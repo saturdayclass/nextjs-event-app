@@ -1,5 +1,5 @@
 import { getAllDocuments } from '../../../helpers/db-util';
-import { Connect, insertDocument } from './../../../helpers/api-util';
+import { Connect, insertDocument } from './../../../helpers/db-util';
 async function handler(req, res) {
   const eventId = req.query.eventId;
 
