@@ -1,3 +1,5 @@
+import { MongoClient } from 'mongodb';
+
 export async function Connect() {
   const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
     useUnifiedTopology: true,

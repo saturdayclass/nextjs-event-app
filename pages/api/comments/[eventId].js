@@ -1,12 +1,7 @@
-import { MongoClient } from 'mongodb';
 import { getAllDocuments } from '../../../helpers/db-util';
 import { Connect, insertDocument } from './../../../helpers/api-util';
 async function handler(req, res) {
   const eventId = req.query.eventId;
-
-  const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB, {
-    useUnifiedTopology: true,
-  });
 
   let client;
   try {
